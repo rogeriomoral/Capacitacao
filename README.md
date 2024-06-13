@@ -17,13 +17,21 @@ Rogério Moreira Almeida
 1. Instalar o CoppeliaSim 
 2. Elaborar um relatório de atividades que explique como funciona
 dentro do Simulador:
+
          a. Criar uma nova Cena;
+   
          b. Como a simulação do Coppelia funciona;
+   
          c. Diferenças entre modo Síncrono e Assíncrono;
+   
          d. Relação Hierárquica dos objetos;
+   
          e. Configurações de propriedade dos objetos;
+   
          f. Acessar um modelo;
+   
          g. Configuração e utilização da API Remota em Python.
+   
 
 # Capacitação Ras OnBoarding - Missão 01
 
