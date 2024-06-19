@@ -18,9 +18,8 @@ O projeto será realizado em três missões:
 
 - **Conhecendo o CoppeliaSIM:** Utilizar o software de simulação robótica CoppeliaSim para criar cenas e
 manipular objetos.
-- **Modelagem com CoppeliaSIM** Utilizar o software de simulação robótica CoppeliaSim para criar o seu
-próprio modelo de robô móvel de tração diferencial.
-- **Cinemática com CoppeliaSim** Implementar, no
+- **Modelagem com CoppeliaSIM:** Utilizar o software de simulação robótica CoppeliaSim para criar o seu próprio modelo de robô móvel de tração diferencial.
+- **Cinemática com CoppeliaSim:** Implementar, no
 modelo criado de robô móvel de tração diferencial, o controle cinemático das velocidades de roda.
 
 ### Missão 2:
