@@ -16,18 +16,18 @@ client = RemoteAPIClient()
 sim = client.getObject('sim')
     
 # Handles do robô e das juntas
-robotHandle = sim.getObject('/robozao')    
-robotLeftMotorHandle  = sim.getObject('/robozao/motor_esquerdo')
-robotRightMotorHandle = sim.getObject('/robozao/motor_direito')
+robotHandle = sim.getObject('/PioneerP3DX')    
+robotLeftMotorHandle  = sim.getObject('/PioneerP3DX/leftMotor')
+robotRightMotorHandle = sim.getObject('/PioneerP3DX/rightMotor')
     
-# configuração do Goal (x, y, theta)
-goalPosition = np.array([2, 0, np.deg2rad(90)])
-#qgoal = np.array([-2, -4, np.deg2rad(180)])
+referenceHandle = sim.getObject('/Ponto_1')
 
 # Raio do chassi
-L = 0.085
+#L = 0.085
 # raio da roda
-r = 0.02
+#r = 0.035
+L = 0.331
+r = 0.09751
 #velocidade maxima linear e angular
 maxv = 1.0
 maxw = np.deg2rad(45)
@@ -35,16 +35,21 @@ maxw = np.deg2rad(45)
 rho = np.inf
 
 sim.startSimulation()
-while rho > .10:
+while rho > 0.05:
 
+    #pega posição do goal
+    goalPosition = getCurrentlyPosition(referenceHandle)
     #pega a posição atual do robô
     robotConfig = getCurrentlyPosition(robotHandle)
 
     #calcula erro
-    dx, dy, dth = goalPosition - robotConfig
+    #dx, dy, dth = goalPosition - robotConfig
+    dx = goalPosition[0] - robotConfig[0]
+    dy = goalPosition[1] - robotConfig[1]
+    dth = goalPosition[2] - robotConfig[2] 
 
     # distancia do centro do robo até o goal
-    rho = np.sqrt(dx**2 + dy**2)
+    rho = np.sqrt((dx**2) + (dy**2))
     print(rho)
     # quao longe a orientação do robo está do alvo
     alpha = normalizeAngle(-robotConfig[2] + np.arctan2(dy,dx))
@@ -52,22 +57,22 @@ while rho > .10:
     beta = normalizeAngle(goalPosition[2] - np.arctan2(dy,dx))
 
     # constantes de estabilidade
-    kr = 3 / 14
-    ka = 8 / 14
-    kb = -1.5 / 14
+    kr = 3 / 40
+    ka = 8 / 40
+    kb = -1.5 / 40
 
     # calcula velocidade linear e angular
     v = kr*rho
     w = ka*alpha + kb*beta
     
-    # limitando v e w para os limites definidos anteriormente
-    v = max(min(v, maxv), -maxv)
-    w = max(min(w, maxw), -maxw)        
+    # limitando v e w para os limites definidos anteriormente       
+    v = np.clip(v, -maxv, maxv)
+    w = np.clip(w, -maxw, maxw)
     
     # definindo velocidade das rodas
     wr = ((2.0*v) + (w*L))/(2.0*r)
     wl = ((2.0*v) - (w*L))/(2.0*r)
-    
+
     sim.setJointTargetVelocity(robotRightMotorHandle, wr)
     sim.setJointTargetVelocity(robotLeftMotorHandle, wl)
     
