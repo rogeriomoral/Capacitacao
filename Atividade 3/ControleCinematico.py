@@ -29,6 +29,4 @@ while (t := sim.getSimulationTime()) < 10:
     pos = sim.getObjectPosition(handle_robo, -1)
     print(pos)
 
-
-
 sim.stopSimulation()
