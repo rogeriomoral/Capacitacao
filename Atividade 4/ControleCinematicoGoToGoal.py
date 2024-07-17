@@ -1,4 +1,3 @@
-import math
 from coppeliasim_zmqremoteapi_client import *
 import numpy as np 
 
@@ -20,7 +19,7 @@ robotHandle = sim.getObject('/PioneerP3DX')
 robotLeftMotorHandle  = sim.getObject('/PioneerP3DX/leftMotor')
 robotRightMotorHandle = sim.getObject('/PioneerP3DX/rightMotor')
     
-referenceHandle = sim.getObject('/Ponto_1')
+referenceHandle = sim.getObject('/Ponto_2')
 
 # Raio do chassi
 #L = 0.085
@@ -57,9 +56,9 @@ while rho > 0.05:
     beta = normalizeAngle(goalPosition[2] - np.arctan2(dy,dx))
 
     # constantes de estabilidade
-    kr = 3 / 40
-    ka = 8 / 40
-    kb = -1.5 / 40
+    kr = 3 / 20
+    ka = 8 / 20
+    kb = -1.5 / 20
 
     # calcula velocidade linear e angular
     v = kr*rho
