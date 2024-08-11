@@ -5,6 +5,13 @@ import os
 def carregaImagemPC(filePath):
     return cv2.imread(filePath)
 
+# Função para carregar imagem da Webcam
+def carregaImagemWebcam():
+    camera = cv2.VideoCapture(0) #abre a camera
+    ret, frame = camera.read() #Lê apenas um frame
+    camera.release() #Libera a webcam
+    return frame
+
 def saveImage(imagem, diretorioDesejado):
     diretorio = diretorioDesejado
     #muda para o diretorio desejado
@@ -12,14 +19,6 @@ def saveImage(imagem, diretorioDesejado):
 
     #salva
     cv2.imwrite('imagemSalva.jpg', imagem)
-
-
-# Função para carregar imagem da Webcam
-def carregaImagemWebcam():
-    camera = cv2.VideoCapture(0) #abre a camera
-    ret, frame = camera.read() #Lê apenas um frame
-    camera.release() #Libera a webcam
-    return frame
 
 # Função para mostrar a imagem
 def displayImagem(nomeJanela, imagem):
