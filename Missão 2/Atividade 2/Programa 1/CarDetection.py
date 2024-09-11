@@ -4,22 +4,16 @@ import numpy as np
 
 # Função para detectar carros
 def detectar_carros(imagem):
-    os.chdir(r"D:\download v2\ras capacitação\Capacitacao\Missão 2\Atividade 2\Programa 1")
-    carCascade = cv2.CascadeClassifier('cars.xml')
-
     img = np.array(imagem)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    blur = cv2.GaussianBlur(gray, (5,5), 0)
+    sobel = cv2.Sobel(gray, -1, 1, 1)
+    cv2.imshow("imagem", sobel)
+    cv2.waitKey(0)
 
-  #  dilated = cv2.dilate(blur, np.ones((3,3)))
-
-#   kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (20,20))
-  #  closing = cv2.morphologyEx(dilated, cv2.MORPH_CLOSE, kernel)
-
-    thresh = cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 1)
-  #  _, thresh = cv2.threshold(blur, 150, 255, cv2.THRESH_BINARY)
+  #  thresh = cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 1)
+    _, thresh = cv2.threshold(blur, 150, 255, cv2.THRESH_BINARY)
     cv2.imshow("imagem", thresh)
     cv2.waitKey(0)
 

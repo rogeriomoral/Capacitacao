@@ -1,7 +1,5 @@
 import cv2
 import os
-import numpy as np
-
 
 def detectar_invasores(imagem):
     #imagem cinza
